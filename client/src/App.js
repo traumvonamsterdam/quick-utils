@@ -5,8 +5,8 @@ import Calendar from './components/Calendar'
 const App = () => {
   return (
     <div className="App">
-      <header className="App-header">Hey everyone! This is fantastic. Let's see if we can use the Google calendar API here.</header>
-      <Calendar greeting={"Hello"} />
+      <header className="App-header">Hey everyone! This is fantastic. Let's try to create a calendar app!</header>
+      <Calendar />
     </div>
   );
 };

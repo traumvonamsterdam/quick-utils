@@ -9,10 +9,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("client/build"));
 
-app.get("/", (req, res) => {
-  res.send("Main page.");
-});
-
 app.use("/", router);
 
 app.listen(3001);
