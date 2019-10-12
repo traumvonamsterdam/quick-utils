@@ -1,20 +1,19 @@
-@font-face {
-  font-family: "Gill Sans";
-  src: url("/fonts/GillSansStd.otf");
-}
-
 .Calendar {
   color: white;
-  font-family: "Gill Sans";
   display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  flex-direction: column;
+  width: 800px;
+  margin: auto;
+  justify-content: space-around;
 }
 
-.Calendar-component {
-  font-family: "Gill Sans";
-  font-size: 12pt;
-  color: blue;
-  justify-content: center;
+.Calendar-date-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: turquoise;
+  text-align: left;
+}
+
+.Calendar-details {
+  padding: 0 30px 20px 30px;
 }
