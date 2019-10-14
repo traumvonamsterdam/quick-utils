@@ -10,5 +10,9 @@
     "googleapis": "39",
     "helmet": "^3.21.1",
     "react-calendar": "^2.19.2"
+  },
+  "scripts": {
+    "start": "concurrently \"cd apis && nodemon api\" \"nodemon\"",
+    "build": "cd client && yarn build"
   }
 }
