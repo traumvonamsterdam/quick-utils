@@ -13,6 +13,7 @@
   },
   "scripts": {
     "start": "concurrently \"cd apis && nodemon api\" \"nodemon\"",
-    "build": "cd client && yarn build"
+    "build": "cd client && yarn build",
+    "dev": "cd client && yarn start"
   }
 }

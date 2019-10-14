@@ -19,7 +19,6 @@ const EventDescription = ({ date, events }) => {
       <div className="Calendar-details">Your events</div>
       {eventList.map(event => {
         const eventColor = eventColors[event.eventType.toLowerCase()];
-
         return (
           <div
             className="Calendar-details"

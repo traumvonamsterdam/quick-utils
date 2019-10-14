@@ -30,15 +30,12 @@ const MyApp = () => {
 
   return (
     <div className="Calendar">
-      <div>
-        <Calendar
-          onChange={onChange}
-          onClickMonth={onClickMonth}
-          value={date}
-          className={["Calendar-component"]}
-        />
-      </div>
-
+      <Calendar
+        onChange={onChange}
+        onClickMonth={onClickMonth}
+        value={date}
+        className={["Calendar-component"]}
+      />
       <EventDescription date={date} events={events} />
     </div>
   );

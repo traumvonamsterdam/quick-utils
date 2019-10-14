@@ -1,15 +1,20 @@
 .Calendar {
   color: white;
   display: flex;
-  width: 800px;
+  width: 100vw;
+  max-width: 800px;
   margin: auto;
-  justify-content: space-around;
+  padding: 0 15px;
+  justify-content: space-between;
+  text-align: center;
 }
 
 .Calendar-date-column {
   display: flex;
   flex-direction: column;
+  flex: 3 0 10em;
   justify-content: flex-end;
+  margin: 0 0 0 10px;
   color: turquoise;
   text-align: left;
 }
