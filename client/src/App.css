@@ -5,6 +5,14 @@
   justify-content: space-between;
   flex-wrap: wrap;
   flex-direction: column;
+
+  display: flex;
+  width: 100vw;
+  max-width: 800px;
+  margin: auto;
+  padding: 0 15px;
+  justify-content: space-between;
+  text-align: center;
 }
 
 .App-logo {
@@ -23,4 +31,9 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.theme-toggle {
+  width: 500px;
+  /* margin: 0 30px 20px 30px; */
 }
