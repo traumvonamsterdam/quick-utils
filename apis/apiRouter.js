@@ -23,6 +23,17 @@ router.get("/users/:name/:month", (req, res) => {
   res.json({ events });
 });
 
+router.get("/users/:name", (req, res) => {
+  let events = [];
+  const { name, month } = req.params;
+
+  const user = dummyUserEvents.find(user => {
+    return user.name == name;
+  });
+
+  res.json({ events: user.events });
+});
+
 router.get("/*", (req, res) => {
   res.json({
     msg: "Api route not found."

@@ -10,16 +10,18 @@ const App = () => {
 
   useEffect(() => {
     document.body.style.backgroundColor =
-      theme == "dark" ? darkTheme : lightTheme;
+      theme === "dark" ? darkTheme : lightTheme;
   }, [theme]);
 
   // Toggle dark/light mode
   const changeBgColor = () => {
+    // document.body.style.backgroundColor =
+    //   theme === "dark" ? darkTheme : lightTheme;
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
   const buttonName = () => {
-    return theme == "dark" ? "Switch to light theme" : "Switch to dark theme";
+    return theme === "dark" ? "Switch to light theme" : "Switch to dark theme";
   };
 
   return (
@@ -28,7 +30,9 @@ const App = () => {
         Hey everyone! This is fantastic. Let's try to create a calendar app!
       </header>
       <Calendar />
-      <button onClick={changeBgColor} className="theme-toggle">{buttonName()}</button>
+      <button onClick={changeBgColor} className="theme-toggle">
+        {buttonName()}
+      </button>
     </div>
   );
 };
