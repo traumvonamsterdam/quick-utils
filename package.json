@@ -9,7 +9,9 @@
     "express": "^4.17.1",
     "googleapis": "39",
     "helmet": "^3.21.1",
-    "react-calendar": "^2.19.2"
+    "morgan": "^1.9.1",
+    "react-calendar": "^2.19.2",
+    "react-tabs": "^3.0.0"
   },
   "scripts": {
     "start": "concurrently \"cd apis && nodemon api\" \"nodemon\"",

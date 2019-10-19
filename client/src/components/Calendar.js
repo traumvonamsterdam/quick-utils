@@ -5,42 +5,67 @@ import axios from "axios";
 import "./Calendar.css";
 import "./CalendarComponent.css";
 import DateAndEvents from "./DateAndEvents";
+import { useStateValue } from "../GlobalState";
 
 const MyApp = () => {
   const name = "John";
-  const [date, setDate] = useState(new Date());
-  const [month, setMonth] = useState(new Date().getMonth());
-  const [events, setEvents] = useState([]);
-  const [eventsToday, setEventsToday] = useState([]);
+  const [eventsToday, setEventsToday] = useState();
+  const [{ datePicked, events }, dispatch] = useStateValue();
 
   useEffect(() => {
-    if (name && month) {
-      const PORT = port_config.PORT;
-      axios.get(`http://${PORT}/users/${name}`).then(res => {
-        setEvents(res.data.events);
-      });
+    if (!datePicked) {
+      dispatch({ type: "changeDate", newDate: new Date() });
     }
+    fetchEvents();
   }, []);
 
-  const onChange = date => {
-    setDate(date);
-    setMonth(date.getMonth());
+  useEffect(() => {
+    if (events) {
+      setEventsToday(
+        events.filter(({ day, month }) => {
+          return (
+            day === datePicked.getDate() && month === datePicked.getMonth()
+          );
+        })
+      );
+    }
+  }, [events]);
 
-    setEventsToday(
-      events.filter(({ day, month }) => {
-        return day === date.getDate() && month === date.getMonth();
-      })
-    );
+  const fetchEvents = () => {
+    const PORT = port_config.PORT;
+    axios.get(`http://${PORT}/users/${name}`).then(res => {
+      dispatch({
+        type: "updateEvents",
+        events: res.data.events
+      });
+    });
+  };
+
+  const onChange = date => {
+    dispatch({ type: "changeDate", newDate: date });
+    if (events) {
+      setEventsToday(
+        events.filter(({ day, month }) => {
+          return day === date.getDate() && month === date.getMonth();
+        })
+      );
+    }
   };
 
   return (
     <div className="Calendar">
       <Calendar
+        value={datePicked}
         onChange={onChange}
-        value={date}
+        minDate={new Date(2001, 0, 1)}
+        maxDate={new Date(2050, 11, 31)}
         className={["Calendar-component"]}
       />
-      <DateAndEvents date={date} events={eventsToday} />
+      <DateAndEvents
+        date={datePicked}
+        events={eventsToday}
+        handleClick={fetchEvents}
+      />
     </div>
   );
 };

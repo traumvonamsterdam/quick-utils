@@ -2,7 +2,7 @@ import React from "react";
 import "./Calendar.css";
 import "./CalendarComponent.css";
 
-const EventDescription = ({ date, events }) => {
+const EventDescription = ({ date, events, handleClick }) => {
   const eventList = events ? events : [];
   const eventColors = {
     sport: "blue",
@@ -16,12 +16,18 @@ const EventDescription = ({ date, events }) => {
       <div className="Calendar-details">
         <h3>{date.toDateString()}</h3>
       </div>
-      <div className="Calendar-details">Your events</div>
+      <div className="Calendar-details">
+        Your events
+        <button onClick={handleClick} className="refresh-button">
+          Refresh
+        </button>
+      </div>
+
       {eventList.map(event => {
         const eventColor = eventColors[event.eventType.toLowerCase()];
         return (
           <div
-            className="Calendar-details"
+            className="Calendar-events"
             key={event.id}
             style={{ backgroundColor: eventColor }}
           >

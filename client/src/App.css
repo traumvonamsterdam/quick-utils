@@ -14,9 +14,15 @@
   justify-content: space-between;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
+.App {
+  color: white;
+  display: flex;
+  width: 100vw;
+  max-width: 800px;
+  margin: auto;
+  padding: 0 15px;
+  justify-content: space-between;
+  text-align: center;
 }
 
 .App-header {
@@ -34,6 +40,6 @@
 }
 
 .theme-toggle {
-  width: 500px;
+  width: 300px;
   /* margin: 0 30px 20px 30px; */
 }

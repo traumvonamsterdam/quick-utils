@@ -32,7 +32,47 @@ const users = [
         eventName: "Hiking",
         location: "Rocky mountain",
         details: "Heard the views there are stunning!"
+      },
+      {
+        id: 4,
+        month: 9,
+        day: 10,
+        time: "09:00",
+        eventType: "Outdoors",
+        eventName: "Frisbee",
+        location: "Rocky mountain",
+        details: "Heard the views there are stunning!"
       }
+      // {
+      //   id: 5,
+      //   month: 9,
+      //   day: 10,
+      //   time: "09:00",
+      //   eventType: "Outdoors",
+      //   eventName: "Hiking",
+      //   location: "Rocky mountain",
+      //   details: "Heard the views there are stunning!"
+      // },
+      // {
+      //   id: 6,
+      //   month: 9,
+      //   day: 10,
+      //   time: "09:00",
+      //   eventType: "Outdoors",
+      //   eventName: "Hiking",
+      //   location: "Rocky mountain",
+      //   details: "Heard the views there are stunning!"
+      // },
+      // {
+      //   id: 7,
+      //   month: 9,
+      //   day: 10,
+      //   time: "09:00",
+      //   eventType: "Outdoors",
+      //   eventName: "Hiking",
+      //   location: "Rocky mountain",
+      //   details: "Heard the views there are stunning!"
+      // }
     ]
   },
   {

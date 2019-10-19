@@ -1,12 +1,14 @@
 .Calendar {
-  color: white;
+  display: flex;
+  align-items: flex-start;
+  /* color: white;
   display: flex;
   width: 100vw;
   max-width: 800px;
   margin: auto;
   padding: 0 15px;
   justify-content: space-between;
-  text-align: center;
+  text-align: center; */
 }
 
 .Calendar-date-column {
@@ -20,5 +22,15 @@
 }
 
 .Calendar-details {
+  font-size: 18px;
   padding: 0 30px 20px 30px;
+}
+
+.Calendar-events {
+  padding: 10px 30px;
+  margin: 5px 0;
+}
+
+.refresh-button {
+  float: right;
 }
