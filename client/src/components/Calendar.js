@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
+import useReactRouter from "use-react-router";
 import port_config from "../port-config";
 import axios from "axios";
 import "./Calendar.css";
@@ -11,12 +12,15 @@ const MyApp = () => {
   const name = "John";
   const [eventsToday, setEventsToday] = useState();
   const [{ datePicked, events }, dispatch] = useStateValue();
+  const { history, location, match } = useReactRouter();
 
   useEffect(() => {
     if (!datePicked) {
       dispatch({ type: "changeDate", newDate: new Date() });
     }
-    fetchEvents();
+    if (!events || events.length === 0) {
+      fetchEvents();
+    }
   }, []);
 
   useEffect(() => {

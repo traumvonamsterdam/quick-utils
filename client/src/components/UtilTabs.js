@@ -1,25 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "react-tabs/style/react-tabs.css";
+import useReactRouter from "use-react-router";
 import Calendar from "./Calendar";
-import ThemeToggle from "./ThemeToggle";
+import TaskList from "./TaskList";
+import Preferences from "./Preferences";
+import { useStateValue } from "../GlobalState";
+import utils from "../utils";
+import "react-tabs/style/react-tabs.css";
 
-export default () => (
-  <Tabs>
-    <TabList>
-      <Tab>Calendar</Tab>
-      <Tab>Task List</Tab>
-      <Tab>Preferences</Tab>
-    </TabList>
+const UtilTabs = () => {
+  const { history, location, match } = useReactRouter();
+  const initTabIndex = utils.indexOf(location.pathname.slice(1));
+  const [currentTabIndex, setCurrentTabIndex] = useState(initTabIndex);
 
-    <TabPanel>
-      <Calendar />
-    </TabPanel>
-    <TabPanel>
-      
-    </TabPanel>
-    <TabPanel>
-      <ThemeToggle />
-    </TabPanel>
-  </Tabs>
-);
+  const onSelect = tabIndex => {
+    history.push(`/${utils[tabIndex]}`);
+    setCurrentTabIndex(tabIndex);
+  };
+
+  return (
+    <Tabs onSelect={onSelect} selectedIndex={currentTabIndex}>
+      <TabList>
+        <Tab>Calendar</Tab>
+        <Tab>Task List</Tab>
+        <Tab>Preferences</Tab>
+      </TabList>
+
+      <TabPanel>
+        <Calendar />
+      </TabPanel>
+      <TabPanel>
+        <TaskList />
+      </TabPanel>
+      <TabPanel>
+        <Preferences />
+      </TabPanel>
+    </Tabs>
+  );
+};
+
+export default UtilTabs;

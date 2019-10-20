@@ -1,5 +1,10 @@
 export default (state, action) => {
   switch (action.type) {
+    case "switchTab":
+      return {
+        ...state,
+        selectedTab: action.selectedTab
+      };
     case "changeTheme":
       return {
         ...state,
