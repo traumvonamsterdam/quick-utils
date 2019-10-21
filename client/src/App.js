@@ -3,19 +3,11 @@ import "./App.css";
 import UtilTabs from "./components/UtilTabs";
 import { StateProvider } from "./GlobalState";
 import reducer from "./Reducer";
-import Navbar from './components/Navbar'
+import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import utils from "./utils";
+import initialState from "./InitialState";
 
 const App = () => {
-  const initialState = {
-    weatherLoaded: false,
-    theme: "",
-    datePicked: new Date(),
-    events: [],
-    selectedTab: utils[0]
-  };
-
   return (
     <Router>
       <StateProvider initialState={initialState} reducer={reducer}>

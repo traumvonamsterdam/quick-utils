@@ -6,7 +6,7 @@ import Weather from "./Weather";
 import Calendar from "./Calendar";
 import TaskList from "./TaskList";
 import Preferences from "./Preferences";
-import utils from "../utils";
+import utils from "../Utils";
 import "react-tabs/style/react-tabs.css";
 
 const UtilTabs = () => {

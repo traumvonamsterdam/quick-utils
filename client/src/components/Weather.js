@@ -8,8 +8,6 @@ export default () => {
   const [weatherUrl, setWeatherUrl] = useState("");
 
   let apiKey = "d15c1e96091187473b96203daebc8c2f";
-  let city = "raleigh,us-nc";
-  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
 
   const getWeather = async () => {
     try {
