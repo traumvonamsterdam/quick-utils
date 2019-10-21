@@ -17,11 +17,17 @@ export default (state, action) => {
         datePicked: action.newDate
       };
 
-      case "updateEvents":
-        return {
-          ...state,
-          events: action.events
-        };
+    case "updateEvents":
+      return {
+        ...state,
+        events: action.events
+      };
+
+    case "weatherLoaded":
+      return {
+        ...state,
+        weatherLoaded: true
+      };
 
     default:
       return state;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useStateValue } from "../GlobalState";
+import { Button } from "reactstrap";
 import "../App.css";
 
 const ThemeToggle = () => {
@@ -31,9 +32,9 @@ const ThemeToggle = () => {
   };
 
   return (
-    <button onClick={changeBgColor} className="theme-toggle">
+    <Button onClick={changeBgColor} className="theme-toggle">
       {buttonName()}
-    </button>
+    </Button>
   );
 };
 

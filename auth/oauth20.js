@@ -15,10 +15,8 @@ passport.use(
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: "http://localhost:3001/auth/google/callback"
     },
-    function(accessToken, refreshToken, profile, cb) {
-      User.findOrCreate({ googleId: profile.id }, function(err, user) {
-        return cb(err, user);
-      });
+    (accessToken, refreshToken, profile, done) => {
+      return done(null, profile);
     }
   )
 );

@@ -2,6 +2,8 @@ import React from "react";
 import "./Calendar.css";
 import "./CalendarComponent.css";
 
+import { Button } from "reactstrap";
+
 const EventDescription = ({ date, events, handleClick }) => {
   const eventList = events ? events : [];
   const eventColors = {
@@ -18,9 +20,9 @@ const EventDescription = ({ date, events, handleClick }) => {
       </div>
       <div className="Calendar-details">
         Your events
-        <button onClick={handleClick} className="refresh-button">
+        <Button onClick={handleClick} className="refresh-button">
           Refresh
-        </button>
+        </Button>
       </div>
 
       {eventList.map(event => {

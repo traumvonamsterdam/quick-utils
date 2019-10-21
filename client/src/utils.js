@@ -1,3 +1,3 @@
-const utils = ["calendar", "tasklist", "preferences"];
+const utils = ["weather", "calendar", "tasklist", "preferences"];
 
 export default utils;
