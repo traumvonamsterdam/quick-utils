@@ -2,7 +2,7 @@ import Utils from "./Utils";
 
 export default {
   msg: "",
-  displayName: "",
+  username: "",
   weatherLoaded: false,
   theme: "",
   datePicked: new Date(),

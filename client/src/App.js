@@ -1,8 +1,10 @@
 import React from "react";
 import "./App.css";
+import Message from "./components/Message";
+import Greet from "./components/Greet";
 import UtilTabs from "./components/UtilTabs";
 import { StateProvider } from "./GlobalState";
-import reducer from "./Reducer";
+import reducer from "./GlobalReducer";
 import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import initialState from "./InitialState";
@@ -12,8 +14,9 @@ const App = () => {
     <Router>
       <StateProvider initialState={initialState} reducer={reducer}>
         <Navbar />
+        <Message />
         <div className="App">
-          <header className="App-header">Welcome to QuickUtils&trade;!!</header>
+          <Greet />
           <UtilTabs />
         </div>
       </StateProvider>

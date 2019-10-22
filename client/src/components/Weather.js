@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "reactstrap";
 import { useStateValue } from "../GlobalState";
+import { apiKey } from "./config";
 
 export default () => {
   const [{ weatherLoaded }, dispatch] = useStateValue();
   const [weatherUrl, setWeatherUrl] = useState("");
-
-  let apiKey = "d15c1e96091187473b96203daebc8c2f";
 
   const getWeather = async () => {
     try {
@@ -20,7 +19,7 @@ export default () => {
   };
 
   useEffect(() => {
-    let lat, lng, weatherUrl;
+    let lat, lng;
     const geoSuccess = position => {
       lat = position.coords.latitude;
       lng = position.coords.longitude;

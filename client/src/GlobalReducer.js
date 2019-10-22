@@ -1,5 +1,10 @@
 export default (state, action) => {
   switch (action.type) {
+    case "changeUsername":
+      return {
+        ...state,
+        username: action.username
+      };
     case "switchTab":
       return {
         ...state,
@@ -10,25 +15,21 @@ export default (state, action) => {
         ...state,
         theme: action.newTheme
       };
-
     case "changeDate":
       return {
         ...state,
         datePicked: action.newDate
       };
-
     case "updateEvents":
       return {
         ...state,
         events: action.events
       };
-
     case "weatherLoaded":
       return {
         ...state,
         weatherLoaded: true
       };
-
     default:
       return state;
   }
