@@ -16,7 +16,7 @@ export default () => {
       const res = await axios.get("/user/name");
       newUsername = res.name;
     }
-    dispatch({ type: "changeUsername", username: newUsername });
+    dispatch({ type: "changeUserInfo", username: newUsername });
   };
 
   useEffect(() => {

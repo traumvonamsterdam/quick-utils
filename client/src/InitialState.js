@@ -1,9 +1,10 @@
 import Utils from "./Utils";
 
 export default {
+  loggedIn: false,
   msg: "",
-  username: "",
-  weatherLoaded: false,
+  userInfo: "",
+  weather: null,
   theme: "",
   datePicked: new Date(),
   events: [],
