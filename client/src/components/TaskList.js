@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Input, Button } from "reactstrap";
+import { useStateValue } from "../GlobalState";
 import "../App.css";
-
-// fake data generator
-const getItems = count =>
-  Array.from({ length: count }, (v, k) => k).map(k => ({
-    id: `item-${k}`,
-    content: `item ${k}`
-  }));
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -25,6 +20,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   userSelect: "none",
   padding: grid * 2,
   margin: `0 0 ${grid}px 0`,
+  borderRadius: `5px`,
 
   // change background colour if dragging
   background: isDragging ? "lightgreen" : "grey",
@@ -36,11 +32,13 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 const getListStyle = isDraggingOver => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
-  width: 250
+  borderRadius: `5px`
+  // width: 250
 });
 
 const TaskList = () => {
-  const [items, setItems] = useState(getItems(5));
+  const [{ tasks }, dispatch] = useStateValue();
+  const [newTask, setNewTask] = useState("");
 
   const onDragEnd = result => {
     // dropped outside the list
@@ -48,46 +46,78 @@ const TaskList = () => {
       return;
     }
     const reorderedItems = reorder(
-      items,
+      tasks,
       result.source.index,
       result.destination.index
     );
-    setItems(reorderedItems);
+
+    // const newTasks = Array.from(tasks);
+
+    dispatch({ type: "updateTasks", tasks: reorderedItems });
   };
 
   // Normally you would want to split things out into separate components.
   // But in this example everything is just done in one place for simplicity
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="droppable">
-        {(provided, snapshot) => (
-          <div
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            style={getListStyle(snapshot.isDraggingOver)}
-          >
-            {items.map((item, index) => (
-              <Draggable key={item.id} draggableId={item.id} index={index}>
-                {(provided, snapshot) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    style={getItemStyle(
-                      snapshot.isDragging,
-                      provided.draggableProps.style
-                    )}
-                  >
-                    {item.content}
-                  </div>
-                )}
-              </Draggable>
-            ))}
-            {provided.placeholder}
-          </div>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <>
+      <form style={{ display: "flex" }}>
+        <Input
+          placeholder="New task..."
+          style={{ margin: "20px 10px 20px 0" }}
+          onChange={e => {
+            setNewTask(e.target.value);
+          }}
+          value={newTask}
+        />
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={e => {
+            e.preventDefault();
+            dispatch({
+              type: "updateTasks",
+              tasks: [{ id: new Date().getTime(), content: newTask }, ...tasks]
+            });
+            setNewTask("");
+          }}
+          style={{ margin: "20px 0" }}
+        >
+          Submit
+        </button>
+      </form>
+
+      {/* drag and drop task list */}
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="droppable">
+          {(provided, snapshot) => (
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              style={getListStyle(snapshot.isDraggingOver)}
+            >
+              {tasks.map((item, index) => (
+                <Draggable key={item.id} draggableId={item.id} index={index}>
+                  {(provided, snapshot) => (
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      style={getItemStyle(
+                        snapshot.isDragging,
+                        provided.draggableProps.style
+                      )}
+                    >
+                      {item.content}
+                    </div>
+                  )}
+                </Draggable>
+              ))}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </>
   );
 };
 

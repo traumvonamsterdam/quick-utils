@@ -29,6 +29,7 @@
 .Calendar-events {
   padding: 10px 30px;
   margin: 5px 0;
+  border-radius: 5px;
 }
 
 .refresh-button {

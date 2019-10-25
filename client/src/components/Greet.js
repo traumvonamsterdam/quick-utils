@@ -4,7 +4,7 @@ import { useStateValue } from "../GlobalState";
 require("dotenv").config();
 
 export default () => {
-  const [{ username }, dispatch] = useStateValue();
+  const [{ userInfo }, dispatch] = useStateValue();
   // const [username, setUsername] = useState("Guest");
 
   const fetchDisplayName = async () => {
@@ -16,7 +16,10 @@ export default () => {
       const res = await axios.get("/user/name");
       newUsername = res.name;
     }
-    dispatch({ type: "changeUserInfo", username: newUsername });
+    dispatch({
+      type: "changeUserInfo",
+      userInfo: { ...userInfo, name: newUsername }
+    });
   };
 
   useEffect(() => {
@@ -25,7 +28,7 @@ export default () => {
 
   return (
     <header className="App-header">
-      Welcome to QuickUtils&trade;, {username}!
+      Welcome to QuickUtils&trade;, {userInfo.name}!
     </header>
   );
 };

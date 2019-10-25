@@ -6,6 +6,10 @@ const router = express.Router({ mergeParams: true });
 // Dummy data list of users with events
 const dummyUserEvents = require("./user-events");
 
+router.post("/app-data", (req, res, next) => {
+  // console.log(req.body.data);
+});
+
 router.get("/users/:name/:month", (req, res) => {
   let events = [];
   const { name, month } = req.params;

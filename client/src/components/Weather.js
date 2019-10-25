@@ -9,12 +9,18 @@ export default () => {
   const [weatherUrl, setWeatherUrl] = useState("");
 
   const getWeather = async () => {
-    try {
-      const res = await axios.get(weatherUrl);
-      console.log(res.data);
-      dispatch({ type: "weatherLoaded" });
-    } catch (error) {
-      console.error(error);
+    const res = await axios.get(weatherUrl + "1").catch(err => {
+      // Display error if weather fetching fails
+      dispatch({
+        type: "displayMsg",
+        value: [true, "Failed to fetch weather data."]
+      });
+    });
+    if (res) {
+      const { main, weather, wind } = res.data;
+      const weatherData = { main, weather, wind };
+      // console.log(weatherData);
+      dispatch({ type: "updateWeather", weather: weatherData });
     }
   };
 

@@ -5,7 +5,12 @@ import "../App.css";
 const Preferences = () => {
   useEffect(() => {}, []);
 
-  return <ThemeToggle />;
+  return (
+    <>
+    <ThemeToggle />
+    
+    </>
+  );
 };
 
 export default Preferences;

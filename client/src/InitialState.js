@@ -1,12 +1,22 @@
 import Utils from "./Utils";
 
 export default {
-  loggedIn: false,
-  msg: "",
-  userInfo: "",
+  // Do not need to send these to backend
+  displayMsg: [false, "No messages to display."],
+  msg: "No messages.",
+  userInfo: {
+    name: "Guest"
+  },
+  selectedTab: Utils[0],
   weather: null,
-  theme: "",
   datePicked: new Date(),
+
+  // Send these to backend
+  loggedIn: false,
   events: [],
-  selectedTab: Utils[0]
+  tasks: [
+    { id: 1, content: "Vacuum bedroom" },
+    { id: 2, content: "Finish weather util" }
+  ],
+  theme: "dark"
 };
