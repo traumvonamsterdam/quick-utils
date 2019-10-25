@@ -8,12 +8,12 @@ export default () => {
 
   const [bool, msg] = displayMsg;
   useEffect(() => {
-    if (bool) {
+    if (bool && msg) {
       dispatch({ type: "displayMsg", value: [false, msg] });
       setFadeIn(true);
       setTimeout(() => {
         setFadeIn(false);
-      }, 5000);
+      }, 4000);
     }
   }, [bool, msg]);
 

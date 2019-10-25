@@ -6,8 +6,9 @@ import "./Calendar.css";
 import "./CalendarComponent.css";
 import DateAndEvents from "./DateAndEvents";
 import { useStateValue } from "../GlobalState";
+import { fetchEvents } from "../fetchData";
 
-const MyApp = () => {
+const CalendarApp = () => {
   const name = "John";
   const [eventsToday, setEventsToday] = useState();
   const [{ datePicked, events }, dispatch] = useStateValue();
@@ -17,7 +18,7 @@ const MyApp = () => {
       dispatch({ type: "changeDate", newDate: new Date() });
     }
     if (!events || events.length === 0) {
-      fetchEvents();
+      fetchEvents(dispatch);
     }
   }, []);
 
@@ -32,26 +33,6 @@ const MyApp = () => {
       );
     }
   }, [events]);
-
-  const fetchEvents = () => {
-    const PORT = port_config.PORT;
-    axios
-      .get(`http://${PORT}/users/${name}`)
-      .then(res => {
-        // Update events list after fetch
-        dispatch({
-          type: "updateEvents",
-          events: res.data.events
-        });
-      })
-      .catch(err => {
-        // Display error if fetch fails
-        dispatch({
-          type: "displayMsg",
-          value: [true, "Failed to catch calendar data."]
-        });
-      });
-  };
 
   const onChange = date => {
     // Update date
@@ -77,10 +58,10 @@ const MyApp = () => {
       <DateAndEvents
         date={datePicked}
         events={eventsToday}
-        handleClick={fetchEvents}
+        handleClick={fetchEvents.bind(null, dispatch)}
       />
     </div>
   );
 };
 
-export default MyApp;
+export default CalendarApp;
