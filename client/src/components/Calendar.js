@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import port_config from "../port-config";
-import axios from "axios";
 import "./Calendar.css";
 import "./CalendarComponent.css";
 import DateAndEvents from "./DateAndEvents";
@@ -9,34 +7,11 @@ import { useStateValue } from "../GlobalState";
 import { fetchEvents } from "../fetchData";
 
 const CalendarApp = () => {
-  const name = "John";
   const [eventsToday, setEventsToday] = useState();
   const [{ datePicked, events }, dispatch] = useStateValue();
 
-  useEffect(() => {
-    if (!datePicked) {
-      dispatch({ type: "changeDate", newDate: new Date() });
-    }
-    if (!events || events.length === 0) {
-      fetchEvents(dispatch);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (events) {
-      setEventsToday(
-        events.filter(({ day, month }) => {
-          return (
-            day === datePicked.getDate() && month === datePicked.getMonth()
-          );
-        })
-      );
-    }
-  }, [events]);
-
-  const onChange = date => {
-    // Update date
-    dispatch({ type: "changeDate", newDate: date });
+  // Filter events for a specific date
+  const filterEvents = (events, date) => {
     if (events) {
       setEventsToday(
         events.filter(({ day, month }) => {
@@ -44,6 +19,22 @@ const CalendarApp = () => {
         })
       );
     }
+  };
+
+  useEffect(() => {
+    // Fetch today's events
+    fetchEvents(dispatch);
+  }, []);
+
+  useEffect(() => {
+    // Re-filter events when events are updated (e.g. after refresh)
+    filterEvents(events, datePicked);
+  }, [events]);
+
+  const onChange = date => {
+    // Update date and find events for that date
+    dispatch({ type: "changeDate", newDate: date });
+    filterEvents(events, date);
   };
 
   return (

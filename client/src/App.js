@@ -17,7 +17,7 @@ const App = () => {
   const data = { loggedIn, events, tasks, theme };
 
   const sendToBackend = data => {
-    // console.log("POST request");
+    // Send post request to backend when user changes data
     axios
       .post(`http://${PORT}/app-data`, { data })
       .catch(err => console.log("Error in post request"));
