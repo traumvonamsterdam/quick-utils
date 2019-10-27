@@ -12,10 +12,12 @@ const stateUpdate = {
 
 export default (state, action) => {
   // Update and return new state
-  if (stateUpdate[action.type]) {
+
+  if (action.type in stateUpdate) {
     const newState = { ...state };
     const [a, b] = stateUpdate[action.type];
-    if (newState[a] && action[b]) {
+
+    if (a in newState && b in action) {
       newState[a] = action[b];
       return newState;
     }

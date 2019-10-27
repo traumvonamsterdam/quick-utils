@@ -6,18 +6,23 @@ const PORT = port_config.PORT;
 
 const name = "John";
 
-export const fetchWeather = async dispatch => {
+export const fetchWeather = dispatch => {
   const geoSuccess = async position => {
+    // Get user location
     const lat = position.coords.latitude;
     const lng = position.coords.longitude;
 
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}`;
+    // URL for 5-day forecast
+    let weatherUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lng}&appid=${apiKey}`;
 
-    axios
-      .get(url)
+    // Fetch weather data for user location
+    await axios
+      .get(weatherUrl)
       .then(res => {
-        const { main, weather, wind } = res.data;
-        const weatherData = { main, weather, wind };
+        // const { main, weather, wind } = res.data;
+        // const weatherData = { main, weather, wind };
+        const weatherData = res.data;
+
         // Update weather if successful
         dispatch({ type: "updateWeather", weather: weatherData });
         console.log(weatherData);
