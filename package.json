@@ -5,6 +5,7 @@
   "author": "James Leung <jleung128hk@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "assert": "^2.0.0",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
@@ -14,6 +15,8 @@
     "googleapis": "39",
     "helmet": "^3.21.1",
     "http-errors": "^1.7.3",
+    "mongodb": "^3.3.3",
+    "mongoose": "^5.7.7",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",

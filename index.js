@@ -8,6 +8,9 @@ const session = require("express-session");
 const passport = require("passport");
 const mainRouter = require("./routers/mainRouter");
 const authRouter = require("./routers/authRouter");
+const { User, connectDb } = require("./models/models")
+
+const port = process.env.PORT || 3001
 
 app.use(helmet());
 app.use(express.json());
@@ -36,4 +39,8 @@ app.get("*", (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, "./client/build/") });
 });
 
-app.listen(3001);
+connectDb().then(async () => {
+  app.listen(port, () =>
+    console.log(`Your app listening on port ${port}!`),
+  );
+});

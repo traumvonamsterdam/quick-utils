@@ -25,6 +25,7 @@ const UtilTabs = () => {
         <Tab>Calendar</Tab>
         <Tab>Task List</Tab>
         <Tab>Preferences</Tab>
+        {/* Dictionary */}
       </TabList>
 
       <TabPanel>
