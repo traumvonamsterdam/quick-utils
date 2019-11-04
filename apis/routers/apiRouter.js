@@ -4,8 +4,8 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 
 // Dummy data list of users with events
-const dummyUserEvents = require("./user-events");
-const dummyUserTasks = require("./user-tasks");
+const dummyUserEvents = require("../user-events");
+const dummyUserTasks = require("../user-tasks");
 
 router.post("/app-data", (req, res, next) => {
   // console.log(req.body.data);
@@ -31,12 +31,6 @@ router.get("/users/:name/tasks", (req, res) => {
   });
 
   res.json({ tasks: user.tasks });
-});
-
-router.get("/*", (req, res) => {
-  res.json({
-    msg: "Api route not found."
-  });
 });
 
 module.exports = router;

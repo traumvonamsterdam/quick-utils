@@ -15,8 +15,8 @@ export default {
   loggedIn: false,
   events: [],
   tasks: [
-    { id: 1, content: "Vacuum bedroom" },
-    { id: 2, content: "Finish weather util" }
+    // { id: 1, content: "Vacuum bedroom" },
+    // { id: 2, content: "Finish weather util" }
   ],
   theme: "dark"
 };

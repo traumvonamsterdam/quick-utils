@@ -3,6 +3,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Input, Button } from "reactstrap";
 import { useStateValue } from "../GlobalState";
 import "../App.css";
+import { submitTask } from "../submitData";
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -73,12 +74,17 @@ const TaskList = () => {
           type="submit"
           className="btn btn-primary"
           onClick={e => {
+            const taskName = newTask;
+            console.log(taskName);
             e.preventDefault();
-            dispatch({
-              type: "updateTasks",
-              tasks: [{ id: new Date().getTime(), content: newTask }, ...tasks]
-            });
-            setNewTask("");
+
+            submitTask(dispatch, { taskName });
+
+            // dispatch({
+            //   type: "updateTasks",
+            //   tasks: [{ id: new Date().getTime(), content: newTask }, ...tasks]
+            // });
+            // setNewTask("");
           }}
           style={{ margin: "20px 0" }}
         >
@@ -96,7 +102,7 @@ const TaskList = () => {
               style={getListStyle(snapshot.isDraggingOver)}
             >
               {tasks.map((item, index) => (
-                <Draggable key={item.id} draggableId={item.id} index={index}>
+                <Draggable key={item._id} draggableId={item._id} index={index}>
                   {(provided, snapshot) => (
                     <div
                       ref={provided.innerRef}
@@ -107,7 +113,7 @@ const TaskList = () => {
                         provided.draggableProps.style
                       )}
                     >
-                      {item.content}
+                      {item.taskName}
                     </div>
                   )}
                 </Draggable>

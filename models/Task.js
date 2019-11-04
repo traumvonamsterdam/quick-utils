@@ -2,11 +2,9 @@ const mongoose = require("mongoose");
 
 mongoose.set("useCreateIndex", true);
 
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true
-  }
+const taskSchema = new mongoose.Schema({
+  taskName: String,
+  date: String
 });
 
 // Find user given login data
@@ -21,6 +19,6 @@ const userSchema = new mongoose.Schema({
 //   return user;
 // };
 
-const User = mongoose.model("User", userSchema);
+const Task = mongoose.model("Task", taskSchema);
 
-module.exports = User;
+module.exports = Task;

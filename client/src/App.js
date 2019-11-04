@@ -27,6 +27,8 @@ const App = () => {
     fetchWeather(dispatch);
     fetchEvents(dispatch);
     fetchTasks(dispatch);
+
+    // LoadState(dispatch);
   }, []);
 
   useEffect(() => {

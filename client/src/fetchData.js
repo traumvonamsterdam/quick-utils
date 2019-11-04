@@ -4,6 +4,8 @@ import { apiKey } from "./config";
 
 const PORT = port_config.PORT;
 
+const apiRoute = "localhost:4000";
+
 const name = "John";
 
 export const fetchWeather = dispatch => {
@@ -64,12 +66,13 @@ export const fetchEvents = dispatch => {
 
 export const fetchTasks = dispatch => {
   axios
-    .get(`http://${PORT}/users/${name}/tasks`)
+    .get(`http://${apiRoute}/tasks/get-tasks`)
     .then(res => {
       // Update task list after fetch
+      console.log(res.data);
       dispatch({
         type: "updateTasks",
-        events: res.data.tasks
+        tasks: res.data
       });
     })
     .catch(err => {

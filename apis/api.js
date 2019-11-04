@@ -1,8 +1,12 @@
 const express = require("express");
 const helmet = require("helmet");
-const router = require("./apiRouter");
+const router = require("./routers/apiRouter");
+const taskRouter = require("./routers/taskRouter");
 const cors = require("cors");
 const morgan = require("morgan");
+const { connectDb } = require("./models/models");
+
+const port = process.env.PORT || 4000;
 
 const app = express();
 app.use(helmet());
@@ -20,5 +24,16 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", router);
+app.use("/tasks", taskRouter);
 
-app.listen(4000);
+app.get("/*", (req, res) => {
+  res.json({
+    msg: "Api route not found."
+  });
+});
+
+connectDb().then(async () => {
+  app.listen(port, () => console.log(`Your app listening on port ${port}!`));
+});
+
+// app.listen(4000);

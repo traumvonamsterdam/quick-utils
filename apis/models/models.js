@@ -3,8 +3,10 @@ const User = require("./User");
 // import Message from './message';
 require("dotenv").config();
 
-const connectDb = () => {
-  return mongoose.connect(process.env.DATABASE_URL, {
+const connectDb = async () => {
+  const uri = process.env.DATABASE_URL;
+
+  return mongoose.connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
   });

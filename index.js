@@ -8,9 +8,8 @@ const session = require("express-session");
 const passport = require("passport");
 const mainRouter = require("./routers/mainRouter");
 const authRouter = require("./routers/authRouter");
-const { User, connectDb } = require("./models/models")
 
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3001;
 
 app.use(helmet());
 app.use(express.json());
@@ -33,14 +32,13 @@ app.use(express.static("client/build"));
 
 app.use("/", mainRouter);
 app.use("/", authRouter);
+// app.use("/", taskRouter);
 
 // Serve page on other react routes
 app.get("*", (req, res) => {
   res.sendFile("index.html", { root: path.join(__dirname, "./client/build/") });
 });
 
-connectDb().then(async () => {
-  app.listen(port, () =>
-    console.log(`Your app listening on port ${port}!`),
-  );
+app.listen(port, () => {
+  console.log("Listening on port 3001");
 });
