@@ -16,12 +16,6 @@ export const submitTask = (dispatch, { taskName }) => {
       }
     })
     .then(res => {
-      // Update task list after fetch
-      // console.log(res.data);
-      // dispatch({
-      //   type: "updateTasks",
-      //   tasks: res.data
-      // });
       fetchTasks(dispatch);
     })
     .catch(err => {
@@ -29,6 +23,20 @@ export const submitTask = (dispatch, { taskName }) => {
       dispatch({
         type: "displayMsg",
         value: [true, "Failed to submit task."]
+      });
+    });
+};
+
+export const deleteTask = (dispatch, { _id }) => {
+  axios
+    .delete(`http://${apiRoute}/tasks/delete-task/${_id}`)
+    .then(res => {
+      fetchTasks(dispatch);
+    })
+    .catch(err => {
+      dispatch({
+        type: "displayMsg",
+        value: [true, "Failed to delete task."]
       });
     });
 };

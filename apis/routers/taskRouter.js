@@ -28,4 +28,16 @@ router.get("/get-tasks", async (req, res) => {
   res.json(tasks);
 });
 
+router.delete("/delete-task/:_id", async (req, res) => {
+  const _id = req.params._id;
+
+  if (_id) {
+    const task = await Task.deleteOne({
+      _id
+    });
+  }
+
+  res.json(_id);
+});
+
 module.exports = router;

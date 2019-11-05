@@ -3,7 +3,8 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Input, Button } from "reactstrap";
 import { useStateValue } from "../GlobalState";
 import "../App.css";
-import { submitTask } from "../submitData";
+import { submitTask, deleteTask } from "../submitData";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -17,6 +18,9 @@ const reorder = (list, startIndex, endIndex) => {
 const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
+  display: "flex",
+  justifyContent: "center",
+
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   padding: grid * 2,
@@ -75,18 +79,12 @@ const TaskList = () => {
           className="btn btn-primary"
           onClick={e => {
             const taskName = newTask;
-            console.log(taskName);
             e.preventDefault();
 
             submitTask(dispatch, { taskName });
-
-            // dispatch({
-            //   type: "updateTasks",
-            //   tasks: [{ id: new Date().getTime(), content: newTask }, ...tasks]
-            // });
-            // setNewTask("");
           }}
           style={{ margin: "20px 0" }}
+          disabled={!newTask}
         >
           Submit
         </button>
@@ -113,7 +111,18 @@ const TaskList = () => {
                         provided.draggableProps.style
                       )}
                     >
-                      {item.taskName}
+                      <p>
+                        {item.taskName}
+                        <FontAwesomeIcon
+                          icon="trash"
+                          onClick={e => {
+                            e.preventDefault();
+                            console.log("Delete icon");
+
+                            deleteTask(dispatch, { _id: item._id });
+                          }}
+                        />
+                      </p>
                     </div>
                   )}
                 </Draggable>

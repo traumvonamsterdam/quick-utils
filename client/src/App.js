@@ -9,6 +9,8 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useStateValue } from "./GlobalState";
 import { fetchWeather, fetchEvents, fetchTasks } from "./fetchData";
+import "./FontAwesome";
+
 
 const PORT = port_config.PORT;
 
