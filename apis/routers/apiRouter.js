@@ -8,8 +8,8 @@ const dummyUserEvents = require("../user-events");
 const dummyUserTasks = require("../user-tasks");
 
 router.post("/app-data", (req, res, next) => {
-  // console.log(req.body.data);
-  res.json("Hi from server");
+  // console.log("Hi from server");
+  // res.json("Hi from server");
 });
 
 router.get("/users/:name/events", (req, res) => {

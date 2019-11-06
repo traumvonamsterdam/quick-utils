@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Input, Button } from "reactstrap";
 import { useStateValue } from "../GlobalState";
 import "../App.css";
-import { submitTask, deleteTask } from "../submitData";
+import { submitTask, deleteTask, updateTasks } from "../submitData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // a little function to help us with reordering the result
@@ -18,9 +18,6 @@ const reorder = (list, startIndex, endIndex) => {
 const grid = 8;
 
 const getItemStyle = (isDragging, draggableStyle) => ({
-  display: "flex",
-  justifyContent: "center",
-
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   padding: grid * 2,
@@ -45,20 +42,30 @@ const TaskList = () => {
   const [{ tasks }, dispatch] = useStateValue();
   const [newTask, setNewTask] = useState("");
 
+  // useEffect(() => {
+  //   if (tasks.length) {
+  //     updateTasks(dispatch, tasks);
+  //   }
+  // }, [tasks]);
+
   const onDragEnd = result => {
     // dropped outside the list
     if (!result.destination) {
       return;
     }
-    const reorderedItems = reorder(
+    const reorderedTasks = reorder(
       tasks,
       result.source.index,
       result.destination.index
     );
 
-    // const newTasks = Array.from(tasks);
+    reorderedTasks.forEach((task, index) => {
+      task.order = index;
+    });
 
-    dispatch({ type: "updateTasks", tasks: reorderedItems });
+    dispatch({ type: "updateTasks", tasks: reorderedTasks });
+
+    // const newTasks = Array.from(tasks);
   };
 
   // Normally you would want to split things out into separate components.
@@ -82,6 +89,7 @@ const TaskList = () => {
             e.preventDefault();
 
             submitTask(dispatch, { taskName });
+            setNewTask("");
           }}
           style={{ margin: "20px 0" }}
           disabled={!newTask}
@@ -111,18 +119,25 @@ const TaskList = () => {
                         provided.draggableProps.style
                       )}
                     >
-                      <p>
-                        {item.taskName}
-                        <FontAwesomeIcon
-                          icon="trash"
-                          onClick={e => {
-                            e.preventDefault();
-                            console.log("Delete icon");
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          padding: "0 100px"
+                        }}
+                      >
+                        <div>{item.taskName}</div>
+                        <div>
+                          <FontAwesomeIcon
+                            icon="times"
+                            onClick={e => {
+                              e.preventDefault();
 
-                            deleteTask(dispatch, { _id: item._id });
-                          }}
-                        />
-                      </p>
+                              deleteTask(dispatch, { _id: item._id });
+                            }}
+                          />
+                        </div>
+                      </div>
                     </div>
                   )}
                 </Draggable>

@@ -11,6 +11,21 @@ const stateUpdate = {
 };
 
 export default (state, action) => {
+  const checkForExceptions = () => {
+    if (action.type === "updateTasks") {
+      const { tasks } = action;
+      // const reorderedTasks = tasks.sort((a, b) => {
+      //   return a.order > b.order;
+      // });
+      const reorderedTasks = tasks.forEach((task, index) => {
+        task.order = index;
+      });
+      return { ...state, tasks: reorderedTasks };
+    }
+  };
+
+  checkForExceptions();
+
   // Update and return new state
 
   if (action.type in stateUpdate) {
@@ -22,5 +37,6 @@ export default (state, action) => {
       return newState;
     }
   }
+
   return state;
 };

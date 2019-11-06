@@ -69,10 +69,13 @@ export const fetchTasks = dispatch => {
     .get(`http://${apiRoute}/tasks/get-tasks`)
     .then(res => {
       // Update task list after fetch
-      console.log(res.data);
+      const tasks = res.data;
+      const reorderedTasks = tasks.sort((a, b) => {
+        return a.order > b.order;
+      })
       dispatch({
         type: "updateTasks",
-        tasks: res.data
+        tasks: reorderedTasks
       });
     })
     .catch(err => {

@@ -7,6 +7,21 @@ const PORT = port_config.PORT;
 
 const apiRoute = "localhost:4000";
 
+export const updateDbTasks = (dispatch, tasks) => {
+  // Update tasks in remote database
+  axios
+    .patch(`http://${apiRoute}/tasks/update-tasks`, {
+      tasks
+    })
+    .catch(err => {
+      // Display error if request fails
+      dispatch({
+        type: "displayMsg",
+        value: [true, "Failed to update tasks."]
+      });
+    });
+};
+
 export const submitTask = (dispatch, { taskName }) => {
   axios
     .post(`http://${apiRoute}/tasks/submit-task`, {
@@ -19,7 +34,6 @@ export const submitTask = (dispatch, { taskName }) => {
       fetchTasks(dispatch);
     })
     .catch(err => {
-      // Display error if fetch fails
       dispatch({
         type: "displayMsg",
         value: [true, "Failed to submit task."]

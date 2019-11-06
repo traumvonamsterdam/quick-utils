@@ -2,9 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Task = require("../models/Task");
 
-const createTask = async ({ id, taskName, date }) => {
+const createTask = async ({ taskName, date }) => {
   const task = new Task({
-    id,
     taskName,
     date
   });
@@ -24,6 +23,16 @@ router.post("/submit-task", (req, res, next) => {
 
 router.get("/get-tasks", async (req, res) => {
   const tasks = await Task.find();
+  tasks.sort((a, b) => {
+    return a.order > b.order;
+  });
+  res.json(tasks);
+});
+
+router.patch("/reorder-tasks", async (req, res) => {
+  const date = "";
+
+  const tasks = req.body.tasks;
 
   res.json(tasks);
 });

@@ -15,7 +15,7 @@ const users = [
       },
       {
         id: 2,
-        month: 9,
+        month: 10,
         day: 9,
         time: "15:15",
         eventType: "Social",
@@ -25,7 +25,7 @@ const users = [
       },
       {
         id: 3,
-        month: 9,
+        month: 10,
         day: 10,
         time: "09:00",
         eventType: "Outdoors",
@@ -35,7 +35,7 @@ const users = [
       },
       {
         id: 4,
-        month: 9,
+        month: 10,
         day: 10,
         time: "09:00",
         eventType: "Outdoors",

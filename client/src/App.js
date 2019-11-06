@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useStateValue } from "./GlobalState";
 import { fetchWeather, fetchEvents, fetchTasks } from "./fetchData";
 import "./FontAwesome";
-
+import { updateDbTasks } from "./submitData";
 
 const PORT = port_config.PORT;
 
@@ -20,18 +20,20 @@ const App = () => {
 
   const sendToBackend = data => {
     // Send post request to backend when user changes data
-    axios
-      .post(`http://${PORT}/app-data`, { data })
-      .catch(err => console.log("Error in post request"));
+    // axios
+    //   .post(`http://${PORT}/app-data`, { data })
+    //   .catch(err => console.log("Error in post request"));
   };
 
   useEffect(() => {
     fetchWeather(dispatch);
     fetchEvents(dispatch);
     fetchTasks(dispatch);
-
-    // LoadState(dispatch);
   }, []);
+
+  // useEffect(() => {
+  //   updateDbTasks(dispatch, tasks);
+  // }, [JSON.stringify(tasks)]);
 
   useEffect(() => {
     sendToBackend(data);
