@@ -4,7 +4,7 @@ const router = require("./routers/apiRouter");
 const taskRouter = require("./routers/taskRouter");
 const cors = require("cors");
 const morgan = require("morgan");
-const { connectDb } = require("./models/models");
+const connectDb = require("./models/models");
 
 const port = process.env.PORT || 4000;
 

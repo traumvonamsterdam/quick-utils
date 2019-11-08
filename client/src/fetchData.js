@@ -70,12 +70,9 @@ export const fetchTasks = dispatch => {
     .then(res => {
       // Update task list after fetch
       const tasks = res.data;
-      const reorderedTasks = tasks.sort((a, b) => {
-        return a.order > b.order;
-      })
       dispatch({
         type: "updateTasks",
-        tasks: reorderedTasks
+        tasks
       });
     })
     .catch(err => {

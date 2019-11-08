@@ -12,13 +12,13 @@ const stateUpdate = {
 
 export default (state, action) => {
   const checkForExceptions = () => {
+    // Update order when tasks are changed
     if (action.type === "updateTasks") {
       const { tasks } = action;
-      // const reorderedTasks = tasks.sort((a, b) => {
-      //   return a.order > b.order;
-      // });
-      const reorderedTasks = tasks.forEach((task, index) => {
-        task.order = index;
+      
+      // Reorder tasks whenever tasks are changed
+      const reorderedTasks = tasks.sort((a, b) => {
+        return a.order < b.order;
       });
       return { ...state, tasks: reorderedTasks };
     }

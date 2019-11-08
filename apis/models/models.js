@@ -12,4 +12,4 @@ const connectDb = async () => {
   });
 };
 
-module.exports = { User, connectDb };
+module.exports = connectDb;

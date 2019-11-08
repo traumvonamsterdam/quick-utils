@@ -4,7 +4,8 @@ mongoose.set("useCreateIndex", true);
 
 const taskSchema = new mongoose.Schema({
   taskName: String,
-  date: String
+  date: String,
+  order: Number
 });
 
 // Find user given login data

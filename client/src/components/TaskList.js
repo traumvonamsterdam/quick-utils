@@ -3,7 +3,12 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { Input, Button } from "reactstrap";
 import { useStateValue } from "../GlobalState";
 import "../App.css";
-import { submitTask, deleteTask, updateTasks } from "../submitData";
+import {
+  submitTask,
+  deleteTask,
+  updateTasks,
+  updateTaskOrder
+} from "../submitData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // a little function to help us with reordering the result
@@ -63,7 +68,7 @@ const TaskList = () => {
       task.order = index;
     });
 
-    dispatch({ type: "updateTasks", tasks: reorderedTasks });
+    updateTaskOrder(dispatch, { reorderedTasks });
 
     // const newTasks = Array.from(tasks);
   };
@@ -88,7 +93,10 @@ const TaskList = () => {
             const taskName = newTask;
             e.preventDefault();
 
-            submitTask(dispatch, { taskName });
+            const date = "";
+            const data = { tasks, taskName, date };
+
+            submitTask(dispatch, { data });
             setNewTask("");
           }}
           style={{ margin: "20px 0" }}
@@ -133,7 +141,10 @@ const TaskList = () => {
                             onClick={e => {
                               e.preventDefault();
 
-                              deleteTask(dispatch, { _id: item._id });
+                              deleteTask(dispatch, {
+                                tasks,
+                                taskToDelete: item
+                              });
                             }}
                           />
                         </div>

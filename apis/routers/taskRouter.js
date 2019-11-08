@@ -1,52 +1,33 @@
 const express = require("express");
 const router = express.Router();
-const Task = require("../models/Task");
+const {
+  createTask,
+  getTasks,
+  reorderTasks,
+  deleteTask
+} = require("../dbLogic/taskLogic");
 
-const createTask = async ({ taskName, date }) => {
-  const task = new Task({
-    taskName,
-    date
-  });
-  await task.save();
-};
-
-router.post("/submit-task", (req, res, next) => {
-  const taskName = req.body.task.taskName;
-
-  const date = "";
-
-  const taskData = { taskName, date };
-  createTask(taskData);
-
+router.post("/submit-task", async (req, res, next) => {
+  const { tasks, taskName, date } = req.body.data;
+  await createTask({ tasks, taskName, date });
   res.json(taskName);
 });
 
 router.get("/get-tasks", async (req, res) => {
-  const tasks = await Task.find();
-  tasks.sort((a, b) => {
-    return a.order > b.order;
-  });
+  const tasks = await getTasks();
   res.json(tasks);
 });
 
 router.patch("/reorder-tasks", async (req, res) => {
-  const date = "";
-
   const tasks = req.body.tasks;
-
+  await reorderTasks({ tasks });
   res.json(tasks);
 });
 
-router.delete("/delete-task/:_id", async (req, res) => {
-  const _id = req.params._id;
-
-  if (_id) {
-    const task = await Task.deleteOne({
-      _id
-    });
-  }
-
-  res.json(_id);
+router.patch("/delete-task/", async (req, res) => {
+  const { tasks, taskToDelete } = req.body;
+  await deleteTask({ tasks, taskToDelete });
+  res.json(taskToDelete);
 });
 
 module.exports = router;
