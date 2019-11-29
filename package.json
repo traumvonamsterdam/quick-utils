@@ -29,7 +29,7 @@
   "scripts": {
     "start": "concurrently \"cd apis && nodemon api\" \"nodemon\"",
     "build": "cd client && yarn build",
-    "dev": "cd client && yarn start",
+    "dev": "concurrently \"cd client && yarn start\" \"cd apis && nodemon api\"",
     "api": "cd apis && nodemon api"
   }
 }
