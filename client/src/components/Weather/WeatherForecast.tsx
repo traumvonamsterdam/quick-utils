@@ -3,7 +3,7 @@ import { useStateValue } from "../../state-management/GlobalState";
 
 const WeatherForecast = () => {
   const {
-    state: { weather },
+    weather,
     dispatch
   } = useStateValue();
 

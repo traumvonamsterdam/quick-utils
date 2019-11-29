@@ -3,7 +3,7 @@ import { Fade } from "reactstrap";
 import { useStateValue } from "../../state-management/GlobalState";
 
 export default () => {
-  const {displayMsg, dispatch} = useStateValue();
+  const { displayMsg , dispatch} = useStateValue();
   const [fadeIn, setFadeIn] = useState(false);
 
   const [bool, msg] = displayMsg;

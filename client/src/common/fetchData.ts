@@ -8,8 +8,8 @@ const apiRoute = "localhost:4000";
 
 const name = "John";
 
-export const fetchWeather = dispatch => {
-  const geoSuccess = async position => {
+export const fetchWeather = (dispatch: any) => {
+  const geoSuccess = async (position: any) => {
     // Get user location
     const lat = position.coords.latitude;
     const lng = position.coords.longitude;
@@ -45,7 +45,7 @@ export const fetchWeather = dispatch => {
   navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
 };
 
-export const fetchEvents = dispatch => {
+export const fetchEvents = (dispatch: any) => {
   axios
     .get(`http://${PORT}/users/${name}/events`)
     .then(res => {
@@ -64,7 +64,7 @@ export const fetchEvents = dispatch => {
     });
 };
 
-export const fetchTasks = dispatch => {
+export const fetchTasks = (dispatch: any) => {
   axios
     .get(`http://${apiRoute}/tasks/get-tasks`)
     .then(res => {

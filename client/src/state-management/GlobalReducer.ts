@@ -1,5 +1,12 @@
+import { Task, State, Action } from "../interfaces";
+
 // Object literal for updating the state
-const stateUpdate = {
+
+interface StateUpdate {
+  [key: string]: [string, string];
+}
+
+const stateUpdate: StateUpdate = {
   changeUserInfo: ["userInfo", "userInfo"],
   switchTab: ["selectedTab", "selectedTab"],
   displayMsg: ["displayMsg", "value"],
@@ -10,14 +17,14 @@ const stateUpdate = {
   changeTheme: ["theme", "newTheme"]
 };
 
-export default (state, action) => {
+export default (state: State, action: Action) => {
   const checkForExceptions = () => {
     // Update order when tasks are changed
     if (action.type === "updateTasks") {
       const { tasks } = action;
-      
+
       // Reorder tasks whenever tasks are changed
-      const reorderedTasks = tasks.sort((a, b) => {
+      const reorderedTasks = tasks.sort((a: Task, b: Task) => {
         return a.order < b.order;
       });
       return { ...state, tasks: reorderedTasks };

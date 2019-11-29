@@ -14,7 +14,7 @@ const UtilTabs = () => {
   const location = useLocation();
   const tabIndex = utils.indexOf(location.pathname.slice(1));
 
-  const onSelect = tabIndex => {
+  const onSelect = (tabIndex: number) => {
     history.push(`/${utils[tabIndex]}`);
   };
 

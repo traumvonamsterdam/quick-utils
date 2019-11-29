@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useStateValue } from "../../state-management/GlobalState";
 import { Button } from "reactstrap";
 import "../../App.css";
@@ -6,11 +6,11 @@ import "../../App.css";
 const ThemeToggle = () => {
   const darkTheme = "rgb(40, 44, 52)";
   const lightTheme = "rgb(194, 214, 255)";
-  const {theme, dispatch} = useStateValue(darkTheme);
+  const { theme, dispatch } = useStateValue();
 
   useEffect(() => {
     const body = document.querySelector("body");
-    const initColor = window.getComputedStyle(body).backgroundColor;
+    const initColor = window.getComputedStyle(body!).backgroundColor;
     if (initColor === "rgb(40, 44, 52)") {
       dispatch({ type: "changeTheme", newTheme: "dark" });
     } else {

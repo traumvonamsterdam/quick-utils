@@ -3,10 +3,21 @@ import "./Calendar.css";
 import "./CalendarComponent.css";
 
 import { Button } from "reactstrap";
+import { EventEl } from "../../interfaces";
 
-const EventDescription = ({ date, events, handleClick }) => {
+const EventDescription = (input: {
+  date: Date;
+  events: EventEl[];
+  handleClick: any;
+}) => {
+  const { date, events, handleClick } = input;
   const eventList = events ? events : [];
-  const eventColors = {
+
+  interface EventColors {
+    [key: string]: string;
+  }
+
+  const eventColors: EventColors = {
     sport: "blue",
     social: "pink",
     outdoors: "green"
@@ -25,7 +36,7 @@ const EventDescription = ({ date, events, handleClick }) => {
         </Button>
       </div>
 
-      {eventList.map(event => {
+      {eventList.map((event: EventEl) => {
         const eventColor = eventColors[event.eventType.toLowerCase()];
         return (
           <div

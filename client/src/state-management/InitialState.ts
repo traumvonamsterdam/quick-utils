@@ -1,6 +1,7 @@
 import Utils from "../common/Utils";
+import { State } from "../interfaces";
 
-export default {
+const state: State = {
   // Do not need to send these to backend
   displayMsg: [false, "No messages to display."],
   msg: "No messages.",
@@ -20,3 +21,5 @@ export default {
   ],
   theme: "dark"
 };
+
+export default state;

@@ -21,9 +21,9 @@ export default () => {
 
   let history = useHistory();
 
-  const onClickHome = e => {
+  const onClickHome = (e: any) => {
     e.preventDefault();
-    history.push('/')
+    history.push("/");
   };
 
   return (

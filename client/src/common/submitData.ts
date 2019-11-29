@@ -2,16 +2,17 @@ import axios from "axios";
 import port_config from "../port-config";
 // import { apiKey } from "../config";
 import { fetchTasks } from "./fetchData";
+import { Task } from "../interfaces";
 
 const PORT = port_config.PORT;
 
 const apiRoute = "localhost:4000";
 
-export const submitTask = (dispatch, { data }) => {
+export const submitTask = (dispatch: any, input: { data: any }) => {
   // Add task in db then refetch
   axios
     .post(`http://${apiRoute}/tasks/submit-task`, {
-      data
+      data: input.data
     })
     .then(res => {
       fetchTasks(dispatch);
@@ -24,21 +25,27 @@ export const submitTask = (dispatch, { data }) => {
     });
 };
 
-export const updateTaskOrder = (dispatch, { reorderedTasks }) => {
+export const updateTaskOrder = (
+  dispatch: any,
+  input: { reorderedTasks: Task[] }
+) => {
   // Update frontend
-  dispatch({ type: "updateTasks", tasks: reorderedTasks });
+  dispatch({ type: "updateTasks", tasks: input.reorderedTasks });
   // Update database
   axios.patch(`http://${apiRoute}/tasks/reorder-tasks/`, {
-    tasks: reorderedTasks
+    tasks: input.reorderedTasks
   });
 };
 
-export const deleteTask = (dispatch, { tasks, taskToDelete }) => {
+export const deleteTask = (
+  dispatch: any,
+  input: { tasks: Task[]; taskToDelete: Task }
+) => {
   // Delete task in db then refetch
   axios
     .patch(`http://${apiRoute}/tasks/delete-task/`, {
-      tasks,
-      taskToDelete
+      tasks: input.tasks,
+      taskToDelete: input.taskToDelete
     })
     .then(res => {
       fetchTasks(dispatch);

@@ -5,13 +5,14 @@ import "./CalendarComponent.css";
 import DateAndEvents from "./DateAndEvents";
 import { useStateValue } from "../../state-management/GlobalState";
 import { fetchEvents } from "../../common/fetchData";
+import { EventEl } from "../../interfaces";
 
 const CalendarApp = () => {
   const [eventsToday, setEventsToday] = useState();
-  const { datePicked, events, dispatch} = useStateValue();
+  const { datePicked, events, dispatch } = useStateValue();
 
   // Filter events for a specific date
-  const filterEvents = (events, date) => {
+  const filterEvents = (events: EventEl[], date: Date) => {
     if (events) {
       setEventsToday(
         events.filter(({ day, month }) => {
@@ -31,7 +32,7 @@ const CalendarApp = () => {
     filterEvents(events, datePicked);
   }, [events]);
 
-  const onChange = date => {
+  const onChange = (date: any) => {
     // Update date and find events for that date
     dispatch({ type: "changeDate", newDate: date });
     filterEvents(events, date);

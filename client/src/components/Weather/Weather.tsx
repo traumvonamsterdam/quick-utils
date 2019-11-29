@@ -5,7 +5,7 @@ import { fetchWeather } from "../../common/fetchData";
 import WeatherForecast from "./WeatherForecast";
 
 export default () => {
-  const { weather, dispatch } = useStateValue();
+  const {weather, dispatch} = useStateValue();
 
   return (
     <>

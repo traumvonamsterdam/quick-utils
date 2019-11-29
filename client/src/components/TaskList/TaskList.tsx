@@ -9,9 +9,10 @@ import {
   updateTaskOrder
 } from "../../common/submitData";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Task } from "../../interfaces";
 
 // a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
+const reorder = (list: Task[], startIndex: number, endIndex: number) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
   result.splice(endIndex, 0, removed);
@@ -21,7 +22,7 @@ const reorder = (list, startIndex, endIndex) => {
 
 const grid = 8;
 
-const getItemStyle = (isDragging, draggableStyle) => ({
+const getItemStyle = (isDragging: boolean, draggableStyle: any) => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
   padding: grid * 2,
@@ -35,7 +36,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
   ...draggableStyle
 });
 
-const getListStyle = isDraggingOver => ({
+const getListStyle = (isDraggingOver: boolean) => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
   borderRadius: `5px`
@@ -43,7 +44,7 @@ const getListStyle = isDraggingOver => ({
 });
 
 const TaskList = () => {
-  const { tasks, dispatch} = useStateValue();
+  const { tasks, dispatch } = useStateValue();
   const [newTask, setNewTask] = useState("");
 
   // useEffect(() => {
@@ -52,7 +53,7 @@ const TaskList = () => {
   //   }
   // }, [tasks]);
 
-  const onDragEnd = result => {
+  const onDragEnd = (result: any) => {
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -63,7 +64,7 @@ const TaskList = () => {
       result.destination.index
     );
 
-    reorderedTasks.forEach((task, index) => {
+    reorderedTasks.forEach((task: Task, index: number) => {
       task.order = index;
     });
 
@@ -114,7 +115,7 @@ const TaskList = () => {
               ref={provided.innerRef}
               style={getListStyle(snapshot.isDraggingOver)}
             >
-              {tasks.map((item, index) => (
+              {tasks.map((item: Task, index: number) => (
                 <Draggable key={item._id} draggableId={item._id} index={index}>
                   {(provided, snapshot) => (
                     <div
@@ -137,7 +138,7 @@ const TaskList = () => {
                         <div>
                           <FontAwesomeIcon
                             icon="times"
-                            onClick={e => {
+                            onClick={(e: any) => {
                               e.preventDefault();
 
                               deleteTask(dispatch, {

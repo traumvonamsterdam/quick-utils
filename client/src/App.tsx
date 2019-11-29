@@ -15,18 +15,23 @@ import "./FontAwesome";
 // const PORT = port_config.PORT;
 
 const App = () => {
-  const {
-    state: { loggedIn, events, tasks, theme },
-    dispatch
-  } = useStateValue();
+  // let state = null;
+  // let dispatch = null;
+
+  // if (useStateValue() && useStateValue().state) {
+  //   state = useStateValue().state
+  //   state = useStateValue().state
+  // }
+
+  const { loggedIn, events, tasks, theme, dispatch } = useStateValue();
   const data = { loggedIn, events, tasks, theme };
 
-  const sendToBackend = data => {
-    // Send post request to backend when user changes data
-    // axios
-    //   .post(`http://${PORT}/app-data`, { data })
-    //   .catch(err => console.log("Error in post request"));
-  };
+  // const sendToBackend = data => {
+  //   Send post request to backend when user changes data
+  //   axios
+  //     .post(`http://${PORT}/app-data`, { data })
+  //     .catch(err => console.log("Error in post request"));
+  // };
 
   useEffect(() => {
     fetchWeather(dispatch);
@@ -34,7 +39,7 @@ const App = () => {
     fetchTasks(dispatch);
   }, []);
   useEffect(() => {
-    sendToBackend(data);
+    // sendToBackend(data);
   }, [JSON.stringify(data)]);
 
   return (
